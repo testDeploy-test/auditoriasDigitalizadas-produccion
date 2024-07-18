@@ -15,8 +15,7 @@ export const getAllAudits = async (req, res) => {
                 "cantidad_lote", "estado", "tipo_muestra"
             ],*/
             attributes: [ "IDauditoria", "PO", "codigoPedido", "codigoItem", "fecha_auditoria", "hora_inicio", 
-                "hora_fin", [(sequelize.col("formato_auditoria.hora_fin") - 
-                sequelize.col("formato_auditoria.hora_inicio")), "tiempo"],"tipo_auditoria", "alertas_proceso",
+                "hora_fin", [sequelize.literal('formato_auditoria.hora_fin - formato_auditoria.hora_inicio'), "tiempo"],"tipo_auditoria", "alertas_proceso",
                 "cantidad_lote", "estado", "tipo_muestra"
             ],
             include: [
