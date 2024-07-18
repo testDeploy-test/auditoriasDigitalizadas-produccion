@@ -9,8 +9,13 @@ export const getAllAudits = async (req, res) => {
         const allAudits = await audit_format.findAll({
             /*Es necesario especificar la tabla en la funcion timediff porque usuarios tambien 
             tiene los campos hora_inicio y hora_fin por lo que sequelize lo interpreta como ambiguo. */
-            attributes: [ "IDauditoria", "PO", "codigoPedido", "codigoItem", "fecha_auditoria", "hora_inicio", 
+            /*attributes: [ "IDauditoria", "PO", "codigoPedido", "codigoItem", "fecha_auditoria", "hora_inicio", 
                 "hora_fin", [sequelize.fn("timediff", sequelize.col("formato_auditoria.hora_fin"), 
+                sequelize.col("formato_auditoria.hora_inicio")), "tiempo"],"tipo_auditoria", "alertas_proceso",
+                "cantidad_lote", "estado", "tipo_muestra"
+            ],*/
+            attributes: [ "IDauditoria", "PO", "codigoPedido", "codigoItem", "fecha_auditoria", "hora_inicio", 
+                "hora_fin", [(sequelize.col("formato_auditoria.hora_fin") - 
                 sequelize.col("formato_auditoria.hora_inicio")), "tiempo"],"tipo_auditoria", "alertas_proceso",
                 "cantidad_lote", "estado", "tipo_muestra"
             ],
