@@ -64,6 +64,7 @@ export const addOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     let data;
+    let imagen;
     if(!req.files) {
         data = req.body;
     } else {
