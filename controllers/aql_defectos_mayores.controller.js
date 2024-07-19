@@ -2,7 +2,9 @@ import aql from "../models/aql_defectos_mayores.model.js"
 
 export const getAql = async (req, res) => {
     try {
-        const dataAql = await aql.findAll();
+        const dataAql = await aql.findAll({
+            order: [["IDaql", "ASC"]]
+        });
         return res.json(dataAql);
     } catch (error) {
         console.error(error);

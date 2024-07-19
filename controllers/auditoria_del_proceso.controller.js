@@ -10,7 +10,8 @@ export const getAllProcesses = async (req, res) => {
             include: {
                 model: audit_format,
                 attributes: [ "IDauditoria", "PO" ]
-            }
+            },
+            order: [["IDproceso", "ASC"]]
         });
         return res.json(allProcesses);
     } catch (error) {

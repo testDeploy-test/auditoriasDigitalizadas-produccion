@@ -22,7 +22,8 @@ export const getAllAudits = async (req, res) => {
                 { model: aql, as: "aql", attributes: { exclude: [ "minimo", "maximo" ] } },
                 { model: users, attributes: [ "IDusuario", "nombre"] },
                 { model: technologies, attributes: [ "IDtecnologia", "nombre" ] }
-            ]
+            ],
+            order: [["IDauditoria", "ASC"]]
         });
         return res.json(allAudits);
     } catch (error) {

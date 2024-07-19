@@ -7,7 +7,8 @@ export const getAllOrders = async (req, res) => {
     try {
         const allOrders = await orders.findAll({
             attributes: ["codigoPedido", "descripcion", "codigoCliente", "imagen", "createdAt"],
-            include: [ { model: technologies, attributes: [ "nombre" ] } ]
+            include: [ { model: technologies, attributes: [ "nombre" ] } ],
+            order: [["codigoPedido", "ASC"]]
         });
         return res.json(allOrders);
     } catch (error) {
@@ -64,11 +65,10 @@ export const addOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     let data;
-    let imagen;
     if(!req.files) {
         data = req.body;
     } else {
-        imagen = await uploadImage(req.files.file);
+        let imagen = await uploadImage(req.files.file);
 
         const textFields = req.body;
         data = { textFields, imagen}

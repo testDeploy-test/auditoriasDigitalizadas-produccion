@@ -10,7 +10,8 @@ export const getAllItems = async (req, res) => {
             include: [{
                 model: technologies,
                 attributes: [ "IDtecnologia", "nombre" ]
-            }]
+            }],
+            order: [["codigoItem", "ASC"]]
         });
         return res.json(allItems);
     } catch (error) {

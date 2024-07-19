@@ -2,7 +2,9 @@ import customers from "../models/clientes.model.js";
 
 export const getAllCustomers = async (req, res) => {
     try {
-        const allCustomers = await customers.findAll();
+        const allCustomers = await customers.findAll({
+            order: [["codigoCliente", "ASC"]]
+        });
         return res.json(allCustomers);
     } catch (error) {
         console.error(error);

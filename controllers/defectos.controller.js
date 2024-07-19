@@ -2,7 +2,9 @@ import defects from "../models/defectos.model.js";
 
 export const getAllDefects = async (req, res) => {
     try {
-        const allDefects = await defects.findAll();
+        const allDefects = await defects.findAll({
+            order: [["codigoDefecto", "ASC"]]
+        });
         return res.json(allDefects);
     } catch (error) {
         console.error(error);

@@ -2,7 +2,9 @@ import technologies from "../models/tecnologias.model.js";
 
 export const getAllTechnologies = async (req, res) => {
     try {
-        const allTechnologies = await technologies.findAll();
+        const allTechnologies = await technologies.findAll({
+            order: [["IDtecnologia", "ASC"]]
+        });
         return res.json(allTechnologies);
     } catch (error) {
         console.error(error);
