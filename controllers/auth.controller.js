@@ -7,7 +7,7 @@ import { configDotenv } from "dotenv";
 configDotenv();
 
 export const login = async (req, res) => {
-    //if(!req.body.usuario || !req.body.contraseña) return res.status(400).json({ error: "User and password are required."})
+    if(!req.body.usuario || !req.body.contraseña) return res.status(400).json({ error: "User and password are required."})
 
     const { usuario, contraseña } = req.body;
     const  hora_actual = new Date().toLocaleString();
@@ -38,8 +38,8 @@ export const login = async (req, res) => {
         if (!isMatch) { 
             return res.status(400).json({  message: "Incorrect password." })
         }
-        
-        const token = await crateAccesToken({ id: user.IDusuario, isAdmin: user.superAdmin})
+        const info = user.superAdmin ? { id: user.IDusuario, isAdmin: user.superAdmin} : { id: user.IDusuario}
+        const token = await crateAccesToken(info)
         res.cookie('token', token, { secure: true, sameSite: 'Strict', expires: expirationDate, httpOnly: true });
         return res.json({message: "Login successful.", id: user.IDusuario});
     } catch (error) {
