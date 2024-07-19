@@ -10,8 +10,7 @@ export const getAllOrdersItems = async (req, res) => {
                 model: items, 
                 attributes: [ "codigoItem" ],
                 include: [ { model: technologies, attributes: [ "nombre" ] }]
-            } ],
-            order: [["IDpedido_item", "ASC"]]
+            } ]
         });
         return res.json(allOrdersItems);
     } catch (error) {

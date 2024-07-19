@@ -10,7 +10,7 @@ export const login = async (req, res) => {
     //if(!req.body.usuario || !req.body.contraseña) return res.status(400).json({ error: "User and password are required."})
 
     const { usuario, contraseña } = req.body;
-    const  hora_actual = new Date;
+    const  hora_actual = new Date().toLocaleString();
     const expirationDate = new Date;
 
     try {
