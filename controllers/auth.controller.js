@@ -41,7 +41,6 @@ export const login = async (req, res) => {
             return res.status(400).json({  message: "Incorrect password." })
         }
         const token = await crateAccesToken({ id: user.IDusuario, isAdmin: user.superAdmin})
-        console.log(info)
         console.log(token)
         res.cookie('token', token, { secure: true, sameSite: 'Strict', expires: expirationDate, httpOnly: true });
         return res.json({message: "Login successful.", id: user.IDusuario});
