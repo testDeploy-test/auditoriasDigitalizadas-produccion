@@ -24,14 +24,15 @@ export const login = async (req, res) => {
         const hourParts1 = firstHour.split(":");
         const hourParts2 = secondHour.split(":");
         const hora_inicio = new Date();
-        hora_inicio.setHours(parseInt(hourParts1[0]), parseInt(hourParts1[1]), parseInt(hourParts1[2]));
+        //Añadir +6 hrs para adaptarlo a UTC
+        hora_inicio.setHours(parseInt(hourParts1[0]) + 6, parseInt(hourParts1[1]), parseInt(hourParts1[2]));
         const hora_fin = new Date();
-        hora_fin.setHours(parseInt(hourParts2[0]), parseInt(hourParts2[1]), parseInt(hourParts2[2]));
-        expirationDate.setHours(parseInt(hourParts2[0]), parseInt(hourParts2[1]), parseInt(hourParts2[2]));
+        hora_fin.setHours(parseInt(hourParts2[0]) + 6, parseInt(hourParts2[1]), parseInt(hourParts2[2]));
+        expirationDate.setHours(parseInt(hourParts2[0]) + 6, parseInt(hourParts2[1]), parseInt(hourParts2[2]));
 
-        console.log("ahora",hora_actual)
-        console.log("inicio",hora_inicio)
-        console.log("fin",hora_fin)
+        console.log("ahora", hora_actual)
+        console.log("inicio", hora_inicio)
+        console.log("fin", hora_fin)
         if(hora_actual < hora_inicio || hora_actual > hora_fin) {
             return res.status(400).json({  message: "Wrong time." })
         }
