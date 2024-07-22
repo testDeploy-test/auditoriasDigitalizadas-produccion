@@ -10,6 +10,12 @@ const sequelize = new Sequelize(process.env.DATA_BASE_URL ||
     {
         host: process.env.DB_HOST,
         dialect: process.env.DB_DIALECT,
+        /*dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            }
+        },*/
         pool: {
             max: 10,
             min: 0,

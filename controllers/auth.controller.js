@@ -10,8 +10,8 @@ export const login = async (req, res) => {
     if(!req.body.usuario || !req.body.contraseña) return res.status(400).json({ error: "User and password are required."})
 
     const { usuario, contraseña } = req.body;
-    const  hora_actual = new Date().toLocaleString();
-    const expirationDate = new Date;
+    const  hora_actual = new Date();
+    const expirationDate = new Date();
 
     try {
         const user = await users.findOne({ where: { usuario: usuario, activo: true } });
@@ -29,7 +29,9 @@ export const login = async (req, res) => {
         hora_fin.setHours(parseInt(hourParts2[0]), parseInt(hourParts2[1]), parseInt(hourParts2[2]));
         expirationDate.setHours(parseInt(hourParts2[0]), parseInt(hourParts2[1]), parseInt(hourParts2[2]));
 
-
+        console.log("ahora",hora_actual)
+        console.log("inicio",hora_inicio)
+        console.log("fin",hora_fin)
         if(hora_actual < hora_inicio || hora_actual > hora_fin) {
             return res.status(400).json({  message: "Wrong time." })
         }
@@ -38,8 +40,9 @@ export const login = async (req, res) => {
         if (!isMatch) { 
             return res.status(400).json({  message: "Incorrect password." })
         }
-        const info = user.superAdmin ? { id: user.IDusuario, isAdmin: user.superAdmin} : { id: user.IDusuario}
-        const token = await crateAccesToken(info)
+        const token = await crateAccesToken({ id: user.IDusuario, isAdmin: user.superAdmin})
+        console.log(info)
+        console.log(token)
         res.cookie('token', token, { secure: true, sameSite: 'Strict', expires: expirationDate, httpOnly: true });
         return res.json({message: "Login successful.", id: user.IDusuario});
     } catch (error) {
@@ -50,7 +53,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        res.cookie('token', null, { /*secure: true, sameSite: 'Strict',*/ expires: new Date(0), httpOnly: true });
+        res.cookie('token', null, { secure: true, sameSite: 'Strict', expires: new Date(0), httpOnly: true });
         return res.json({ message: 'Logout successful.' });
     } catch (error) {
         console.error(error);

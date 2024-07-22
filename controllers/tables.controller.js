@@ -8,7 +8,7 @@ const tablesList = tablas.map((item, index) => {
    
     return {
       id: index + 1,
-      nombre: item,
+      nombre: item.toLowerCase(),
       nombreF
     };
  });
