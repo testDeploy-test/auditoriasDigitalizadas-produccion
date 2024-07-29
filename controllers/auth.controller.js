@@ -33,8 +33,10 @@ export const login = async (req, res) => {
         console.log("ahora", hora_actual)
         console.log("inicio", hora_inicio)
         console.log("fin", hora_fin)
-        if(hora_actual < hora_inicio || hora_actual > hora_fin) {
-            return res.status(400).json({  message: "Wrong time." })
+        if(!user.superAdmin) {
+            if(hora_actual < hora_inicio || hora_actual > hora_fin) {
+                return res.status(400).json({  message: "Wrong time." })
+            }
         }
 
         const isMatch = await bcrypt.compare(contraseña, user.contraseña);
