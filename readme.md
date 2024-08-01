@@ -35,16 +35,28 @@ Crea un archivo `.env` en el directorio raíz de la carpeta back con las credenc
 
 ## Despliegue en Render
 
-1.- Dirigete a la página de render (https://render.com) 
-2.- Inicia sesión con las credenciales correspondientes
-3.- Una vez en el dashboard da clic en `+ New` que aparece en la esquina superior derecha al lado izquierdo de tu usuario.
-4.- Selecciona `Web Service` 
-5.- Ingresa el link del repositorio (tiene que estar en público)
-6.- Haz las configuraciones correspondientes. En build command escribe `npm install pg && npm install` y en start command escribe `npm start`
-7.- Espera a que se despliegue la página.
-8.- Vuelve a dashboard, y repite el paso 3.
-9.- Selecciona `PostgeSQL`.
-10.- Completa la configuración
-11.- Una vez creada la base de datos, vielve al dashborad y selecciona tu página
-12.- Dirígete a la sección `Enviroments`
-13.- Crea las variables de entorno de la página web en base a los datos obtenidos al crear la base de datos
+1.- Dirigete a la página de render (https://render.com).  
+
+2.- Inicia sesión con las credenciales correspondientes.  
+
+3.- Una vez en el dashboard da clic en `+ New` que aparece en la esquina superior derecha al lado izquierdo de tu usuario.  
+
+4.- Selecciona `Web Service`.  
+
+5.- Ingresa el link del repositorio (tiene que estar en público).  
+
+6.- Haz las configuraciones correspondientes. En build command escribe `npm install pg && npm install` y en start command escribe `npm start`.  
+
+7.- Espera a que se despliegue la página.  
+
+8.- Vuelve a dashboard, y repite el paso 3.  
+
+9.- Selecciona `PostgeSQL`.  
+
+10.- Completa la configuración.  
+
+11.- Una vez creada la base de datos, vielve al dashborad y selecciona tu página.  
+
+12.- Dirígete a la sección `Enviroments`  
+
+13.- Crea las variables de entorno de la página web en base a los datos obtenidos al crear la base de datos.
