@@ -32,7 +32,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: ["http://localhost:3000", "http://localhost:4200"] }));
+app.use(cors({ credentials: true, origin: ["https://testdeploy-p8ib.onrender.com"] }));
 app.use(fileUpload({createParentPath: true}));
 app.use("/api", aqlRoutes);
 app.use("/api", processRoutes);

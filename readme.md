@@ -1,7 +1,9 @@
 # Auditorías Digitalizadas (Prubas en Render)
 
 Proyecto construido para desplegar en render.
-Este proyecto es uno te pruebas para ver su fucionamiento en un entorno de producción.
+Este proyecto es uno te pruebas para ver su fucionamiento en un entorno de producción.  
+  
+Este repositorio tiene varias diferencias en comparación con el de producción o desarrollo, eso es porque se tuvo que cambiar la base de datos para desplegar en este sitio, ya que no habia otros que fuean convincentes y ofrecieran los recusros a utilizar originalmente. Debido a esto hay diferencias en lo que el usuario puede apreciar y el como lo aprecia, principlamente una de las greaficas no se renderiza debido a como se manejaba con la lógica para la extracción de su información.  
 
 ## Tecnologias
 
