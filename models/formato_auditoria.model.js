@@ -30,7 +30,7 @@ const audit_format = sequelize.define("formato_auditoria",  {
     estado: { type: DataTypes.STRING }
 });
 
-orders.hasOne(audit_format, { foreignKey: "codigoPedido" });
+orders.hasMany(audit_format, { foreignKey: "codigoPedido" });
 audit_format.belongsTo(orders, { foreignKey: 'codigoPedido' });
 
 users.hasMany(audit_format, { foreignKey: "IDusuario" });
