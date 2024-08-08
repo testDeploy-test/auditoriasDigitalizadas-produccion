@@ -27,13 +27,11 @@ export const processQuery = async (req, res) => {
             where: {
             [Op.or]: [
                 {pnc: { [Op.like]: `%${text}%` }},
-                {fecha_apertura: { [Op.like]: `%${text}%` }},
                 {operario: { [Op.like]: `%${text}%` }},
                 {accion: { [Op.like]: `%${text}%` }},
                 {aprobado_por: { [Op.like]: `%${text}%` }},
                 {comentario_accion: { [Op.like]: `%${text}%` }},
                 {observacion: { [Op.like]: `%${text}%` }},
-                {fecha_cierre: { [Op.like]: `%${text}%` } },
                 {re_auditoria: { [Op.like]: `%${text}%` }},
                 {estado_re_auditoria: { [Op.like]: `%${text}%` }},
                 {"$formato_auditorium.PO$": { [Op.like]: `%${text}%`  }}
@@ -83,12 +81,9 @@ export const auditQuery = async (req, res) => {
     const text = req.query.text;
     try {
         const auditSearch = await audit_format.findAll({
-            /*Es necesario especificar la tabla en la funcion timediff porque usuarios tambien 
-            tiene los campos hora_inicio y hora_fin por lo que sequelize lo interpreta como ambiguo. */
-            attributes: [ "IDauditoria", "PO", "codigoPedido", "codigoItem", "fecha_auditoria", "hora_inicio",
-                "hora_fin", [sequelize.fn("timediff", sequelize.col("formato_auditoria.hora_fin"), 
-                sequelize.col("formato_auditoria.hora_inicio")), "tiempo"], "tipo_auditoria", 
-                "alertas_proceso", "cantidad_lote", "estado" 
+            attributes: [ "IDauditoria", "PO", "codigoPedido", "codigoItem", "fecha_auditoria", "hora_inicio", 
+                "hora_fin", [sequelize.literal('(EXTRACT(EPOCH FROM (formato_auditoria.hora_fin - formato_auditoria.hora_inicio)))::integer'), "tiempo"],"tipo_auditoria", "alertas_proceso",
+                "cantidad_lote", "estado", "tipo_muestra"
             ],
             include: [
                 { model: aql, as: "aql", attributes: [ "muestra_inspeccion_normal" ] },
@@ -103,7 +98,6 @@ export const auditQuery = async (req, res) => {
                     {"$usuario.nombre$": { [Op.like]: `%${text}%` }},
                     {"$tecnologia.nombre$": { [Op.like]: `%${text}%` }},
                     {alertas_proceso: { [Op.like]: `%${text}%` }},
-                    {fecha_auditoria: { [Op.like]: `%${text}%` } }
                 ]
             }
         });
