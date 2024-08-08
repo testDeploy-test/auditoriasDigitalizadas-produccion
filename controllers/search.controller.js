@@ -28,14 +28,14 @@ export const processQuery = async (req, res) => {
             [Op.or]: [
                 {pnc: { [Op.like]: `%${text}%` }},
                 {fecha_apertura: `${text}` },
-                {cantidad_rechazada: text },
-                {defectos_encontrados: text },
+                {cantidad_rechazada: parseInt(text) },
+                {defectos_encontrados: parseInt(text) },
                 {operario: { [Op.like]: `%${text}%` }},
                 {accion: { [Op.like]: `%${text}%` }},
                 {aprobado_por: { [Op.like]: `%${text}%` }},
                 {comentario_accion: { [Op.like]: `%${text}%` }},
-                {cantidad_descarte: text },
-                {cantidad_aceptada: text },
+                {cantidad_descarte: parseInt(text) },
+                {cantidad_aceptada: parseInt(text) },
                 {observacion: { [Op.like]: `%${text}%` }},
                 {fecha_cierre: `${text}`},
                 {re_auditoria: { [Op.like]: `%${text}%` }},
@@ -101,8 +101,9 @@ export const auditQuery = async (req, res) => {
             ],
             where: {
                 [Op.or]: [
-                    {IDauditoria: text },
+                    {IDauditoria: parseInt(text) },
                     {codigoPedido: { [Op.like]: `%${text}%` }},
+                    {PO: { [Op.like]: `%${text}%` }},
                     {codigoItem: { [Op.like]: `%${text}%` }},
                     {"$usuario.nombre$": { [Op.like]: `%${text}%` }},
                     {"$tecnologia.nombre$": { [Op.like]: `%${text}%` }},
@@ -208,7 +209,7 @@ export const oiQuery = async (req, res) => {
             where: {
             [Op.or]: [
                 {codigoPedido: { [Op.like]: `%${text}%` }},
-                {cantidad: text},
+                {cantidad: parseInt(text) },
                 {"$item.codigoItem$": { [Op.like]: `%${text}%` }},
                 {"$item.tecnologia.nombre$": { [Op.like]: `%${text}%` }}
             ]}
@@ -226,7 +227,7 @@ export const pdQuery = async (req, res) => {
         const pdSearch = await process_defect.findAll({ where: {
             [Op.or]: [
                 {codigoDefecto: { [Op.like]: `%${text}%` }},
-                {IDproceso: text}
+                {IDproceso: parseInt(text) }
             ]
         },
         order: [["IDproceso", "ASC"]]
