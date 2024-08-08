@@ -27,13 +27,13 @@ export const processQuery = async (req, res) => {
             where: {
             [Op.or]: [
                 {pnc: { [Op.like]: `%${text}%` }},
-                {fecha_apertura: `${text}` },
+                {fecha_apertura: { [Op.like]: `%${text}%` }},
                 {operario: { [Op.like]: `%${text}%` }},
                 {accion: { [Op.like]: `%${text}%` }},
                 {aprobado_por: { [Op.like]: `%${text}%` }},
                 {comentario_accion: { [Op.like]: `%${text}%` }},
                 {observacion: { [Op.like]: `%${text}%` }},
-                {fecha_cierre: `${text}`},
+                {fecha_cierre: { [Op.like]: `%${text}%` } },
                 {re_auditoria: { [Op.like]: `%${text}%` }},
                 {estado_re_auditoria: { [Op.like]: `%${text}%` }},
                 {"$formato_auditorium.PO$": { [Op.like]: `%${text}%`  }}
@@ -103,7 +103,7 @@ export const auditQuery = async (req, res) => {
                     {"$usuario.nombre$": { [Op.like]: `%${text}%` }},
                     {"$tecnologia.nombre$": { [Op.like]: `%${text}%` }},
                     {alertas_proceso: { [Op.like]: `%${text}%` }},
-                    {fecha_auditoria: `${text}` }
+                    {fecha_auditoria: { [Op.like]: `%${text}%` } }
                 ]
             }
         });
