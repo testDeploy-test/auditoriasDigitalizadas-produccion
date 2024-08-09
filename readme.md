@@ -31,8 +31,12 @@ $ npm start
 ### Variables de entorno
 Crea un archivo `.env` en el directorio raíz de la carpeta back con las credenciales de la `base de datos` y `jsonwebtoken`
 
-`PORT` `KEY` `DB_URL` o `DB_NAME` `DB_USER` `DB_PASSWORD` `DB_HOST` `DB_DIALECT`
-*Puedes proporcionar solamente la url a la base de datos u especificar todos los demás campos
+`NODE_ENV` `PORT` `KEY` `DB_URL` o `DB_NAME` `DB_USER` `DB_PASSWORD` `DB_HOST` `DB_DIALECT`  
+
+*El valor de `NODE_ENV` debe ser "production" de preferencia.  
+
+*Puedes proporcionar solamente la url a la base de datos u especificar todos los demás campos  
+
 *Puede que especificar el dialecto como variable de entorno provoque un error, en tal caso modifica el dialecto directamente en el archivo `conexion.js`
 
 ## Despliegue en Render
